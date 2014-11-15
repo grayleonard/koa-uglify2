@@ -13,7 +13,8 @@ Install
 npm install koa-uglify2
 ```
 
-Basic usage:
+Basic Usage
+===========
 
 ```javascript
 var koa = require('koa');
