@@ -1,31 +1,23 @@
 var fs = require('fs');
 var path = require('path');
 
-var cachePath = '.cache/';
-var extension = '.ugly';
+var cache_path = '.cache/';
 
 var cache = module.exports;
 
 cache.is_cached = function(file_path) {
+	if(!fs.existsSync(cache_path))
+		fs.mkdirSync(cache_path, 0755);
 
-	if(!fs.existsSync(cachePath))
-		fs.mkdirSync(cachePath, 0755);
-
-	try {
-		var cached_file_path = path.normalize(cachePath + path.basename(file_path).replace('.js', '.ugly.js'));
-
-		var cached_file = fs.readFileSync(cached_file_path, 'utf8');
+	var cached_file_path = path.normalize(cache_path + path.basename(file_path).replace('.js', '.ugly.js'));
+	if(fs.existsSync(cached_file_path))
 		return true;
-	} catch(e) {
-		return false;
-	}
+	return false;
 }
 
-cache.cache_file = function(file_path) {
-	var cacheDir = path.normalize(cachePath),
-	cacheFile = cacheDir+path.basename(file_path).replace(".js", ".ugly.js");
-
-	fs.writeFile(path.normalize(cacheFile), fs.readFileSync(file_path), "utf-8",
+cache.cache_file = function(file_path, data) {
+	var tocache_path = path.normalize(cache_path+path.basename(file_path).replace(".js", ".ugly.js"));
+	fs.writeFile(path.normalize(tocache_path), data, "utf-8",
 	function(err) {
 		if(err) console.log(err);
 	});
@@ -33,9 +25,8 @@ cache.cache_file = function(file_path) {
 	
 
 cache.fetch_file = function(file_path) {
-	var cacheDir = path.normalize(cachePath),
-	cacheFile = cacheDir+path.basename(file_path).replace(".js", ".ugly.js");	
-	var cached_file = fs.readFileSync(cacheFile, 'utf8');
+	var fetch_path = path.normalize(cache_path+path.basename(file_path).replace(".js", ".ugly.js"));
+	var cached_file = fs.readFileSync(fetch_path, 'utf8');
 	return cached_file;
 }
 

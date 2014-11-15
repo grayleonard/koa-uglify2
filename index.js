@@ -41,7 +41,7 @@ module.exports = function(options) {
 				if(ast) {
 					this.body = ast.print_to_string();
 					this.type = type;
-					cache.cache_file(src + file_path);
+					cache.cache_file(src + file_path, ast.print_to_string());
 					var ms = new Date - start;
 					console.log('%s %s - %s', this.method, this.url, ms);
 				}
