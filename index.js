@@ -18,7 +18,6 @@ module.exports = function(options) {
 		} else {
 			var file_path = url.parse(this.url).pathname;
 			if(cache.is_cached(file_path)) {
-				console.log('fetching cached');
 				var type = path.extname(file_path).substr(1);
 				this.body = cache.fetch_file(file_path);
 				this.type = type;

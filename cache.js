@@ -14,7 +14,6 @@ cache.is_cached = function(file_path) {
 	try {
 		var cached_file_path = path.normalize(cachePath + path.basename(file_path).replace('.js', '.ugly.js'));
 
-		console.log(cached_file_path);
 		var cached_file = fs.readFileSync(cached_file_path, 'utf8');
 		return true;
 	} catch(e) {
