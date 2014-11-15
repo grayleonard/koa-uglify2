@@ -1,0 +1,27 @@
+{
+  "name": "koa-uglify2",
+  "version": "0.0.1",
+  "description": "Koa middleware to uglify javascript",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grayleonard/koa-uglify2.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa",
+    "uglify",
+    "uglify2",
+    "middleware",
+    "harmony"
+  ],
+  "author": "Gray Leonard",
+  "license": "ISC",
+  "dependencies": {
+    "co-fs": "^1.2.0",
+    "path": "^0.4.9",
+    "uglify-js": "^2.4.15"
+  }
+}
