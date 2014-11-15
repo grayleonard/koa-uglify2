@@ -13,8 +13,6 @@ module.exports = function(options) {
 	
 		if(/(\.js)$/.test(this.path) != true) {
 			yield next;
-			var ms = new Date - start;
-			console.log('%s %s - %s', this.method, this.url, ms);
 		} else {
 			var file_path = url.parse(this.url).pathname;
 			if(cache.is_cached(file_path)) {
