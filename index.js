@@ -9,11 +9,10 @@ module.exports = function(options) {
 	var src = (options && options.hasOwnProperty('src')) ? options.src : '.';
 
 	return function*(next) {
-		var start = new Date;
-	
 		if(/(\.js)$/.test(this.path) != true) {
 			yield next;
 		} else {
+			var start = new Date;
 			var file_path = url.parse(this.url).pathname;
 			if(cache.is_cached(file_path)) {
 				var type = path.extname(file_path).substr(1);
