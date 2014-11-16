@@ -9,7 +9,6 @@ cache.is_cached = function(file_path) {
 	if(!fs.existsSync(cache_path))
 		fs.mkdirSync(cache_path, 0755);
 	var file_path_dir = path.dirname(file_path).replace(/\//g, '.').substr(1).concat('.');
-	console.log(file_path_dir);
 	var cached_file_path = path.normalize(cache_path + file_path_dir + path.basename(file_path).replace('.js', '.ugly.js'));
 	if(fs.existsSync(cached_file_path))
 		return true;
