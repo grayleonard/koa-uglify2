@@ -1,6 +1,6 @@
 {
   "name": "koa-uglify2",
-  "version": "0.0.51",
+  "version": "0.0.6",
   "description": "Koa middleware to uglify javascript",
   "main": "index.js",
   "repository": {
