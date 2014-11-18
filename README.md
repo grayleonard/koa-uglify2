@@ -36,7 +36,7 @@ You can also create regex rules to uglify files that are not served statically.
 
 ```javascript
 app.use(uglify({
-	src:	'public/',
+	src: 'public/',
 	rules:	{
 		'google/jquery.js': /^\/.{3}\/regexExample\.js$/
 		}
@@ -59,4 +59,4 @@ app.use(uglify({
 
 This rule will serve admin-files/*.js to, for example: ```GET 12345/testFile.js```
 
-Note that regex should end with \.js$/ - this middleware currently only handles request paths that end with '.js' to save CPU cycles; testing regexes for every request would be expensive.
+Note that regex needs to end with \\.js$/ - this middleware currently only handles request paths that end with '.js' to save CPU cycles; testing regexes for every request would be expensive.
