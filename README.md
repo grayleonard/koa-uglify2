@@ -44,7 +44,7 @@ app.use(uglify({
 );
 ```
 
-This rule will serve public/google/jquery.js to any request that matches the regex, for example: ```GET 123/regexExample.js```.
+This rule will serve public/google/jquery.js to any request that matches the regex, for example: ```GET 123/regexExample.js```.  File-level regex needs to end with ```\.js$/```.
 
 As well, you can designate a directory-level rule to match all javascript files in the folder.
 
@@ -58,5 +58,3 @@ app.use(uglify({
 ```
 
 This rule will serve admin-files/*.js to, for example: ```GET 12345/testFile.js```
-
-Note that regex needs to end with \\.js$/ - this middleware currently only handles request paths that end with '.js' to save CPU cycles; testing regexes for every request would be expensive.
