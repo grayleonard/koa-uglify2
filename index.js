@@ -6,16 +6,38 @@ var cache = require('./cache.js');
 
 module.exports = function(options) {
 
-	var src = (options && options.hasOwnProperty('src')) ? options.src : '.';
+	var src = (options && options.hasOwnProperty('src')) ? options.src : './';
+	var rules = (options && options.hasOwnProperty('rules')) ? options.rules : null;
 
 	return function*(next) {
 		if(/(\.js)$/.test(this.path) != true) {
 			yield next;
-			return
+			return;
 		}
 		var start = new Date;
-		var file_path = url.parse(this.url).pathname;
-		var file_exists = yield fs.exists(path.normalize(src + file_path));
+		var file_path = this.path;
+		var file_exists = false;
+		if(rules == null) {
+			file_exists = yield fs.exists(path.normalize(src + file_path));
+		} else {
+			var matched = false;
+			for(var rule in rules) {
+				var regex_rule = rules[rule];
+				if(file_path.match(regex_rule)) {
+					if(path.extname(rule) != '.js') {
+						file_path = path.normalize(rule + '/' + path.basename(file_path));
+					} else {
+						file_path = rule;
+					}
+					file_exists = yield fs.exists(path.normalize(src + file_path));
+					matched = true;
+					break;
+				}
+			}
+			if(!matched) {
+				file_exists = yield fs.exists(path.normalize(src + file_path));
+			}
+		}
 		if(!file_exists) {
 			yield next;
 			return;
